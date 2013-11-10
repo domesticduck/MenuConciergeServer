@@ -1,17 +1,15 @@
 # encoding: utf-8
-
-require "kconv"
-
 class MenusController < ApplicationController
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :verify_authenticity_token
 
   # GET /menus
   # GET /menus.json
   def index
     @menus = Menu.all
     respond_to do |format|
-      format.text { render text: '1ｱ1' }
-      # format.text { render text: 'きた'.kconv(Kconv::EUC, Kconv::UTF8) }
+      format.text { render text: 'はるちゃん、そうちゃん' }
+      format.html
     end
   end
 
@@ -38,6 +36,7 @@ class MenusController < ApplicationController
       if @menu.save
         format.html { redirect_to @menu, notice: 'Menu was successfully created.' }
         format.json { render action: 'show', status: :created, location: @menu }
+        format.text { render text: @menu.id }
       else
         format.html { render action: 'new' }
         format.json { render json: @menu.errors, status: :unprocessable_entity }
