@@ -16,8 +16,8 @@ class MenusController < ApplicationController
   # GET /menus/select_main_menu.text
   def select_main_menu
     menus = Menu.select_main_menu.sorted_created_at
-    menus.offer_count
-    
+    //menus.offer_count
+
     respond_to do |format|
       format.text { render text: "#{menus[0].id}:16日前に、#{menus[0].name}を作っています。今日あたりどうですか？" }
     end
