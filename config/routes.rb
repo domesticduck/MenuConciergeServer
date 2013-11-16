@@ -1,5 +1,10 @@
 MenuConciergeServer::Application.routes.draw do
+
+  get 'menus/select_main_menu'
+  get 'menus/select_sub_menu'
+  
   resources :menus
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

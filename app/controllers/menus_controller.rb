@@ -13,6 +13,30 @@ class MenusController < ApplicationController
     end
   end
 
+  # GET /menus/select_main_menu.text
+  def select_main_menu
+    menus = Menu.select_main_menu.sorted_created_at
+    menus.offer_count
+    
+    respond_to do |format|
+      format.text { render text: "#{menus[0].id}:16日前に、#{menus[0].name}を作っています。今日あたりどうですか？" }
+    end
+  end
+
+    # GET /menus/select_sub_menu.text
+  def select_sub_menu
+    in_menu = Menu.new(menu_params)
+    menus = Menu.where(main_id: in_menu.main_id)
+    p menus
+
+    sub_menus = menus.map{|menu| menu.name}.join("、")
+    p sub_menus
+
+    respond_to do |format|
+      format.text { render text: sub_menus }
+    end
+  end
+
   # GET /menus/1
   # GET /menus/1.json
   def show
